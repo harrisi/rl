@@ -3,3 +3,4 @@ bin/
 *.tar.gz
 ncurses-6.0/
 *.html
+.*.swp
