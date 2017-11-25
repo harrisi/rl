@@ -13,8 +13,8 @@ int main(int argc, char *argv[]) {
 
     keypad(stdscr, TRUE); // F1, F2, arrow keys, etc.
 
-    height = 3;
-    width = 10;
+    height = 1;
+    width = 1;
     starty = (LINES - height) / 2; // center of window
     startx = (COLS - width) / 2; // center of window
     printw("Press F1 to exit");
@@ -51,7 +51,8 @@ WINDOW *create_newwin(int height, int width, int starty, int startx) {
     WINDOW *local_win;
 
     local_win = newwin(height, width, starty, startx);
-    box(local_win, 0, 0); // 0, 0 gives default characters for vert/horiz lines
+    //box(local_win, 1, 1); // 0, 0 gives default characters for vert/horiz lines
+    mvwaddch(local_win, 0, 0, '@');
     wrefresh(local_win); // show that box
 
     return local_win;

@@ -84,11 +84,14 @@ void init_win_params(WIN *p_win) {
 
 void print_win_params(WIN *p_win) {
 #if _DEBUG
-    mvprintw(25, 0, "%d %d %d %d",
+    attron(A_REVERSE);
+    mvprintw(LINES - 1, 0, "%d %d %d %d",
             p_win->startx,
             p_win->starty,
             p_win->width,
             p_win->height);
+    attroff(A_REVERSE);
+    move(0, 0);
     refresh();
 #endif
 }
@@ -103,21 +106,21 @@ void create_box(WIN *p_win, bool flag) {
     h = p_win->height;
 
     if (flag == TRUE) {
-        mvaddch(y, x, p_win->border.tl);
-        mvaddch(y, x + w, p_win->border.tr);
-        mvaddch(y + h, x, p_win->border.bl);
-        mvaddch(y + h, x + w, p_win->border.br);
-        mvhline(y, x + 1, p_win->border.ts, w - 1);
-        mvhline(y + h, x + 1, p_win->border.bs, w - 1);
-        mvvline(y + 1, x, p_win->border.ls, h - 1);
-        mvvline(y + 1, x + w, p_win->border.rs, h - 1);
+        mvwaddch(p_win, y, x, p_win->border.tl);
+        mvwaddch(p_win, y, x + w, p_win->border.tr);
+        mvwaddch(p_win, y + h, x, p_win->border.bl);
+        mvwaddch(p_win, y + h, x + w, p_win->border.br);
+        mvwhline(p_win, y, x + 1, p_win->border.ts, w - 1);
+        mvwhline(p_win, y + h, x + 1, p_win->border.bs, w - 1);
+        mvwvline(p_win, y + 1, x, p_win->border.ls, h - 1);
+        mvwvline(p_win, y + 1, x + w, p_win->border.rs, h - 1);
     } else {
         for (j = y; j <= y + h; ++j) {
             for (i = x; i <= x + w; ++i) {
-                mvaddch(j, i, ' ');
+                mvwaddch(p_win, j, i, ' ');
             }
         }
     }
 
-    refresh();
+    wrefresh(p_win);
 }
