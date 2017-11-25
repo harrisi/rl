@@ -66,6 +66,16 @@ int main() {
         }
 
         for (int i = 0; i < maxy; i++) {
+            for (int j = 0; j < maxx; j++) {
+                if (map[i][j] == '.') {
+                    if (!(rand() % (maxx * maxy / 10))) {
+                        map[i][j] = '*';
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < maxy; i++) {
             mvprintw(i, 0, map[i]);
         }
 
