@@ -4,12 +4,10 @@
 #include <time.h>
 
 int main() {
-    int row, col; // store number of rows and cols of screen
     int maxy, maxx;
 
     initscr(); // start curses
     getmaxyx(stdscr, maxy, maxx); // get number of rows and cols
-    getmaxyx(stdscr, row, col);
     srand(time(NULL));
     noecho();
     cbreak();
@@ -27,8 +25,8 @@ int main() {
     int curx, cury;
 
     do {
-        for (int i = 0; i < row; i++) {
-            memset(map[i], '#', col);
+        for (int i = 0; i < maxy; i++) {
+            memset(map[i], '#', maxx);
         }
 
         entrancex = rand() % maxx;
@@ -188,7 +186,7 @@ int main() {
         }
     } while (getch() != 'q');
 
-    for (int i = 0; i < row; i++) {
+    for (int i = 0; i < maxy; i++) {
         free(map[i]);
     }
     free(map);
